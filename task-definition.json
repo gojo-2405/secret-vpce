@@ -1,0 +1,32 @@
+{
+  "family": "secret-service-1",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": [
+    "EC2"
+  ],
+  "cpu": "300",
+  "memory": "300",
+  "executionRoleArn": "arn:aws:iam::618246140803:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::618246140803:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "secret-service-1",
+      "image": "618246140803.dkr.ecr.us-east-1.amazonaws.com/secret:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 3000,
+          "hostPort": 3000
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/secret-service-1",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      }
+    }
+  ]
+}
